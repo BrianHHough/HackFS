@@ -6,6 +6,7 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
+import { MoralisProvider } from 'react-moralis';
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
@@ -30,11 +31,16 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />{' '}
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <MoralisProvider
+      serverUrl={process.env.NEXT_PUBLIC_MORALIS_SERVER_URL as string}
+      appId={process.env.NEXT_PUBLIC_MORALIS_APP_ID as string}
+    >
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />{' '}
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </MoralisProvider>
   );
 }
 export default MyApp;
