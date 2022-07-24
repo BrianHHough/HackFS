@@ -108,8 +108,7 @@ const Home: NextPage = () => {
           </pre>
         )}
         {mintLoading && <p className='mt-2'>Minting... please wait</p>}
-
-        {mintedTokenId && (
+        {showConfetti && (
           <p className='mt-2'>
             🥳 Mint successful! You can view your NFT{' '}
             <a
