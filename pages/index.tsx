@@ -2,43 +2,66 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ethers } from 'ethers';
 import type { NextPage } from 'next';
 import { useState } from 'react';
-// import abiFile from '../abi.json';
+import {
+  useContract,
+  useContractRead,
+  useContractWrite,
+  useProvider,
+} from 'wagmi';
+import abiFile from '../abi.json';
 
-// const getOpenSeaURL = (tokenId: string | number) =>
-//   `https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenId}`;
+const CONTRACT_ADDRESS = '0xEB2648a8c9aE50605973821855056068103c9b88';
+
+const getOpenSeaURL = (tokenId: string | number) =>
+  `https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenId}`;
 
 const Home: NextPage = () => {
   const [name, setName] = useState('');
   const [mintLoading, setMintLoading] = useState(false);
   const [mintedTokenId, setMintedTokenId] = useState('');
 
-  // const contractConfig = {
-  //   addressOrName: CONTRACT_ADDRESS,
-  //   contractInterface: abiFile.abi,
-  // };
+  const contractConfig = {
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: abiFile.abi,
+  };
 
-  // const { writeAsync: mint, error: mintError } = useContractWrite({
-  //   ...contractConfig,
-  //   functionName: 'mint',
-  // });
+  const { writeAsync: mint, error: mintError } = useContractWrite({
+    ...contractConfig,
+    functionName: 'registerDomainToOwner',
+  });
 
-  // const onMintClick = async () => {
-  //   try {
-  //     setMintLoading(true);
-  //     const tx = await mint({
-  //       args: [name, { value: ethers.utils.parseEther('0.001') }],
-  //     });
-  //     const receipt = await tx.wait();
-  //     console.log('TX receipt', receipt);
-  //     // @ts-ignore
-  //     const mintedTokenId = await receipt.events[0].args[2].toString();
-  //     setMintedTokenId(mintedTokenId);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setMintLoading(false);
-  //   }
-  // };
+  const provider = useProvider();
+
+  const contract = useContract({
+    ...contractConfig,
+    signerOrProvider: provider,
+  });
+
+  const onMintClick = async () => {
+    try {
+      setMintLoading(true);
+
+      console.log(contract);
+
+      // get domain's price
+      const price = await contract.priceOfDomain(name);
+
+      console.log(price.toString());
+
+      const tx = await mint({
+        args: [name, { value: price.toString() }],
+      });
+      const receipt = await tx.wait();
+      console.log('TX receipt', receipt);
+      // @ts-ignore
+      const mintedTokenId = await receipt.events[0].args[2].toString();
+      setMintedTokenId(mintedTokenId);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setMintLoading(false);
+    }
+  };
 
   return (
     <div className='p-20 flex flex-col items-center'>
@@ -66,14 +89,14 @@ const Home: NextPage = () => {
           type='submit'
           onClick={(e) => {
             e.preventDefault();
-            // onMintClick();
+            onMintClick();
           }}
         >
           Mint
         </button>
       </form>
 
-      {/* {mintError && (
+      {mintError && (
         <pre style={{ marginTop: '8px', color: 'red' }}>
           <code>{JSON.stringify(mintError, null, ' ')}</code>
         </pre>
@@ -92,7 +115,7 @@ const Home: NextPage = () => {
             here!
           </a>
         </p>
-      )} */}
+      )}
     </div>
   );
 };
