@@ -25,6 +25,17 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
+## Deployed Contract:
+
+```
+Compiled 15 Solidity files successfully
+Scoops Domains contract deployed to:  0x5Df7EDe347204aF9E76923Dfe9Fc989a9462818d
+Minted Scoops domain polygon.poly
+Correctly set record for owner: polygon.poly
+Owner of Scoops Domain `polygon` is:  0xdF297aA23C72C39a0338EC6DEB5Ea669aC986E32
+Balance of contract: 0.01
+```
+
 ## Local Deployment via Hardhat
 
 By running `npx hardhat run scripts/run.js` this will run the Scoops `Domains.sol` smart contract and then deploy the input of `polygon` as the Scoops Domain name.
