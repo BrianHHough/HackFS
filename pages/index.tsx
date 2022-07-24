@@ -69,6 +69,11 @@ const Home: NextPage = () => {
         <ConnectButton />
       </div>
 
+      <h1 className='mt-6 text-4xl font-bold'>Scoop Domain Service 🍨</h1>
+      <h3 className='mt-2 text-xl font-semibold text-slate-500'>
+        Mint a domain of your choice on Polygon Mumbai 💜
+      </h3>
+
       <form className='mt-10 flex flex-col items-center'>
         <div className='flex flex-col items-start'>
           <label htmlFor='nameInput' className='text-sm'>
