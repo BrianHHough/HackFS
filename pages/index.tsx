@@ -47,15 +47,22 @@ const Home: NextPage = () => {
       </div>
 
       <form className='mt-10 flex flex-col items-center'>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className='border-2 p-2 rounded'
-          type='text'
-        />
+        <div className='flex flex-col items-start'>
+          <label htmlFor='nameInput' className='text-sm'>
+            Name
+          </label>
+          <input
+            id='nameInput'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className='border-2 p-2 rounded min-w-[300px]'
+            type='text'
+            placeholder='Enter the domain name you want to pick'
+          />
+        </div>
 
         <button
-          className='border-2 rounded mt-6 w-fit px-4 py-2'
+          className='border-[1px] text-white bg-blue-700 font-bold rounded-lg mt-6 w-fit px-4 py-2 drop-shadow-lg'
           type='submit'
           onClick={(e) => {
             e.preventDefault();
