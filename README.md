@@ -29,7 +29,7 @@ npx hardhat run scripts/deploy.js
 
 ```
 Compiled 15 Solidity files successfully
-Scoops Domains contract deployed to:  0x5Df7EDe347204aF9E76923Dfe9Fc989a9462818d
+Scoops Domains contract deployed to:  0xEB2648a8c9aE50605973821855056068103c9b88
 Minted Scoops domain polygon.poly
 Correctly set record for owner: polygon.poly
 Owner of Scoops Domain `polygon` is:  0xdF297aA23C72C39a0338EC6DEB5Ea669aC986E32

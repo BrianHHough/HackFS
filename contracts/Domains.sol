@@ -16,7 +16,7 @@ contract ScoopsDomains is ERC721URIStorage {
     string public scoopdomain; // Create domain `scoopdomain`
 
     // Create a ~lit~ background w/ text inputed from contract as SVG
-    string svgPartOne = '<svg xmlns="http://www.w3.org/2000/svg" width="270" height="270" fill="none"><path fill="url(#a)" d="M0 0h270v270H0z"/><defs><filter id="d" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="270" width="270"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity=".225" width="200%" height="200%"/></filter></defs><svg width="98" height="157" viewBox="0 0 98 137" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="url(#b)" d="M0 0h98v137H0z"/><defs><pattern id="b" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlink:href="#c" transform="matrix(.00309 0 0 .0022 -.053 -.001)"/></pattern><image id="c" width="400" height="400" xlink:href="https://gateway.pinata.cloud/ipfs/QmSQ7RdEQRzr7FqLcV6pLf7S4arU2kkjhpQyzSSf1tUC5X"/></defs></svg><defs><linearGradient id="a" x1="0" y1="0" x2="270" y2="270" gradientUnits="userSpaceOnUse"><stop stop-color="#FBB336"/><stop offset="1" stop-color="#FA0955" stop-opacity=".99"/></linearGradient></defs><text x="32.5" y="231" font-size="27" fill="#fff" filter="url(#d)" font-family="Plus Jakarta Sans,DejaVu Sans,Noto Color Emoji,Apple Color Emoji,sans-serif">';
+    string svgPartOne = '<svg xmlns="http://www.w3.org/2000/svg" width="270" height="270" fill="none"><path fill="url(#a)" d="M0 0h270v270H0z"/><defs><filter id="d" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="270" width="270"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity=".225" width="200%" height="200%"/></filter></defs><svg width="98" height="157" viewBox="0 0 98 137" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="url(#b)" d="M0 0h98v137H0z"/><defs><pattern id="b" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlink:href="#c" transform="matrix(.00309 0 0 .0022 -.053 -.001)"/></pattern><image id="c" width="400" height="400" xlink:href="https://gateway.pinata.cloud/ipfs/QmXtJEywkNq8y2ymMgYypwX96E9iJB4RV9RhcNvHV84xFc"/></defs></svg><defs><linearGradient id="a" x1="0" y1="0" x2="270" y2="270" gradientUnits="userSpaceOnUse"><stop stop-color="#FBB336"/><stop offset="1" stop-color="#FA0955" stop-opacity=".99"/></linearGradient></defs><text x="32.5" y="231" font-size="27" fill="#fff" filter="url(#d)" font-family="Plus Jakarta Sans,DejaVu Sans,Noto Color Emoji,Apple Color Emoji,sans-serif">';
 
     // Round out the svg and end it after putting in the text between svgPartOne and svgPart two
     string svgPartTwo = '</text></svg>';
@@ -60,6 +60,7 @@ contract ScoopsDomains is ERC721URIStorage {
         // Register via unique tokenID
         console.log("Registering %s.%s on the contract with tokenID %d", name, scoopdomain, newRecordId);
 
+        // Compile everything together between name, description, image, and metadat
         string memory json = Base64.encode(
             abi.encodePacked(
                 '{"name": "',
