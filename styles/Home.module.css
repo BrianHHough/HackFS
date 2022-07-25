@@ -8,6 +8,11 @@
   height: 100vh;
 }
 
+.background {
+  background-color: red;
+  height: 100vh;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
