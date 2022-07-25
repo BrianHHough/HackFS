@@ -13,11 +13,13 @@ import abiFile from '../abi.json';
 import "../styles/Home.module.css"
 import { useAccount } from 'wagmi'
 import useSWR from 'swr'
+import Confetti from 'react-confetti';
 
 const CONTRACT_ADDRESS = '0xEB2648a8c9aE50605973821855056068103c9b88';
 
 const getOpenSeaURL = (tokenId: string | number) =>
-  `https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenId}`;
+  `https://testnets.opensea.io/collection/scoops-domains-on-polygon-v3`;
+// `https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenId}`;
 
 import BackgroundImage from "../assets/Scoops.polyHackfs.png"
 
@@ -29,6 +31,7 @@ const Home: NextPage = () => {
   const [covalentData, setCovalentData] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [domainsMintedRTD, setDomainsMintedRTD] = useState();
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const { address } = useAccount();
   const addressScoopsDomainsContract = '0xEB2648a8c9aE50605973821855056068103c9b88'
@@ -45,7 +48,6 @@ const Home: NextPage = () => {
     checkIfLoggedIn();
   }, [])
   
-
   const contractConfig = {
     addressOrName: CONTRACT_ADDRESS,
     contractInterface: abiFile.abi,
@@ -86,6 +88,7 @@ const Home: NextPage = () => {
       console.error(error);
     } finally {
       setMintLoading(false);
+      setShowConfetti(true);
     }
   };
 

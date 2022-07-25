@@ -38,3 +38,4 @@ yarn-error.log*
 #Hardhat files
 cache
 artifacts
+package-lock.json
