@@ -185,6 +185,7 @@ const Home: NextPage = () => {
 
   return (
     <>
+    {showConfetti && <Confetti style={{zIndex: "999"}}/>}
     <div style={{position: "absolute", height: "100vh", width: "100vw", pointerEvents: "none"}}>
       <Image 
         src={BackgroundImage} 
@@ -266,7 +267,7 @@ const Home: NextPage = () => {
       )}
       {mintLoading && <p className='mt-2' style={{color: "white", zIndex: "999"}}>Minting... please wait</p>}
 
-      {mintedTokenId && (
+        {showConfetti &&  (
         <p className='mt-2' style={{color: "white", zIndex: "999"}}>
           🥳 Mint successful! You can view your NFT{' '}
           <a
